@@ -1,24 +1,70 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BurgerConstructor from "./components/burger-constructor/BurgerConstructor";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BurgerConstructor topIngredient={{
+        name: "Краторная булка N-200i",
+        price: 1255,
+        image: "https://code.s3.yandex.net/react/code/bun-02.png",
+      }} middleIngredients={[
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+        {
+          name: "Соус традиционный галактический",
+          price: 15,
+          image: "https://code.s3.yandex.net/react/code/sauce-03.png"
+        },
+      ]} bottomIngredient={{
+        name: "Краторная булка N-200i",
+        price: 1255,
+        image: "https://code.s3.yandex.net/react/code/bun-02.png",
+      }}/>
     </div>
   );
 }

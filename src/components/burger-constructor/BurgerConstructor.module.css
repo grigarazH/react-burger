@@ -1,0 +1,62 @@
+.burgerConstructor {
+    max-width: 600px;
+    composes: pt-25 pl-4 pr-4 from global;
+    box-sizing: border-box;
+}
+
+.ingredientList {
+    composes: mb-10 from global;
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+.ingredient {
+    composes: pl-8 from global;
+    box-sizing: border-box;
+}
+
+.middleIngredientsList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.middleIngredient {
+    composes: mb-4 from global;
+    composes: ingredient;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.middleIngredient > :first-child {
+    position: absolute;
+    left: 0;
+    top: calc(50% - 12px);
+}
+
+.orderInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.orderPrice {
+    composes: text text_type_digits-medium mr-10 from global;
+    display: flex;
+    align-items: center;
+}
+
+.orderPriceIcon {
+    composes: ml-2 from global;
+}
