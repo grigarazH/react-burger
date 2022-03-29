@@ -1,0 +1,37 @@
+.burgerIngredients {
+    composes: pt-10 from global;
+    max-width: 600px;
+    max-height: 850px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    composes: text text_type_main-large mb-5 from global;
+    text-align: start;
+}
+
+.tabList {
+    composes: mb-10 from global;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+.ingredientList {
+    composes: custom-scroll from global;
+    overflow-y: scroll;
+    scroll-padding-top: 40px;
+    flex-grow: 1;
+}
+
+.category {
+    composes: mt-10 from global;
+}
+
+.category:first-child {
+    margin: 0;
+}
+

@@ -1,0 +1,26 @@
+.headerButton {
+    composes: pt-4 pb-4 pl-5 pr-5 from global;
+    background-color: transparent;
+    border: none;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.headerButton:hover {
+    cursor: pointer;
+}
+
+
+.headerButton__icon {
+    composes: mr-2 from global;
+}
+
+.headerButton__title {
+    composes: text text_type_main-default from global;
+    color: #fff;
+}
+
+.headerButton__title_inactive {
+    color: #8585ad;
+}

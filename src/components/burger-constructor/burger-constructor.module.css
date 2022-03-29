@@ -1,6 +1,6 @@
 .burgerConstructor {
     max-width: 600px;
-    composes: pt-25 pl-4 pr-4 from global;
+    composes: pt-25 pl-4 from global;
     box-sizing: border-box;
 }
 
@@ -15,28 +15,35 @@
 }
 
 .ingredient {
-    composes: pl-8 from global;
+    composes: pl-8 pr-4 from global;
     box-sizing: border-box;
 }
 
 .middleIngredientsList {
+    composes: pr-4 mt-4 mb-4 custom-scroll from global;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    margin: 0;
     padding: 0;
-    max-height: 300px;
+    max-height: 466px;
     overflow-y: scroll;
     box-sizing: border-box;
 }
 
+.middleIngredientsList::-webkit-scrollbar {
+    padding-top: 16px;
+}
+
 .middleIngredient {
-    composes: mb-4 from global;
-    composes: ingredient;
+    composes: mb-4 pl-8 from global;
     position: relative;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+}
+
+.middleIngredient:last-of-type {
+    margin: 0;
 }
 
 .middleIngredient > :first-child {
