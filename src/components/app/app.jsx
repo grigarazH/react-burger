@@ -1,20 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import {constructorData, getIngredientAmount, ingredientData} from "../../utils/data";
+import {constructorData, getIngredientAmount} from "../../utils/data";
 import AppHeader from "../app-header/app-header";
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from './app.module.css';
 
 function App() {
-    let ingredientDataWithAmount = ingredientData.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorData), ...ingredient}));
+    const [ingredientData, setIngredientData] = useState([]);
+    const [constructorIngredients, setConstructorIngredients] = useState(constructorData);
+    useEffect(() => {
+       const url = "https://norma.nomoreparties.space/api/ingredients";
+       fetch(url).then(res => {
+          return res.json();
+       }).then(({data}) => {
+           console.log(data);
+           setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIngredients), ...ingredient})));
+       }).catch(err => console.log(err));
+    });
+
     return (
     <div className={styles.app}>
         <AppHeader/>
         <main className={styles.app__content}>
-            <BurgerIngredients ingredients={ingredientDataWithAmount} className={styles.app__ingredients}/>
-            <BurgerConstructor topIngredient={constructorData.topIngredient} middleIngredients={constructorData.middleIngredients} bottomIngredient={constructorData.bottomIngredient}/>
+            <BurgerIngredients ingredients={ingredientData} className={styles.app__ingredients}/>
+            <BurgerConstructor topIngredient={constructorIngredients.topIngredient} middleIngredients={constructorIngredients.middleIngredients} bottomIngredient={constructorIngredients.bottomIngredient}/>
         </main>
     </div>
   );
