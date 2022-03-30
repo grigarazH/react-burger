@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# Проект бургерной на ReactJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание
 
-## Available Scripts
+Проект представляет собой сайт бургерной. На данный момент реализована главная страница.
 
-In the project directory, you can run:
+## Структура
 
-### `npm start`
+На данный момент реализована одна страница, состоящая из компонентов шапки, списка ингердиентов, конструктора бургера.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+В компоненте шапки приведен логотип и меню сайта. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+В компоненте списка ингредиентов приведен список всех доступных игредиентов. У выбранных ингредиентов отображается их количество.
 
-### `npm test`
+В компоненте конструктора бургера приведен список ингредиентов, которые используются в бургере.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Файловая структура
 
-### `npm run build`
+В папке components лежат компоненты React.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+В папке app находится главный компонент приложения React.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+В папке app-header находится компонент шапки.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+В папке burger-constructor находится компонент конструктора бургера.
 
-### `npm run eject`
+В папке burger-ingredient находится компонент ингредиента, использующийся в компоненте списка ингредиентов.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+В папке burger-ingredients находится компонент списка ингредиентов.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+В папке header-button находится компонент кнопки шапки.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+В папке ingredient-category находится компонент категории ингредиентов.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Используемые технологии
 
-## Learn More
+В проекте использовался декларативный подход с помощью фреймворка ReactJS.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Для применения стилей использовался модульный css.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+В качестве языка использовался JavaScript.
+
+Проект был создан с помощью Create React App.
+
+В проекте использовалась библиотека React Developer Burger Ui Components.
+https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/
+
+
