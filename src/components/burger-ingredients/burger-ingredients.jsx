@@ -4,6 +4,8 @@ import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "../ingredient-category/ingredient-category";
+import PropTypes from "prop-types";
+import {ingredientPropType} from "../../utils/data";
 
 const BurgerIngredients = props => {
     const [currentTab, setCurrentTab] = useState("buns");
@@ -12,7 +14,7 @@ const BurgerIngredients = props => {
         setCurrentTab(tabValue);
     }
     return (
-        <section className={`${styles.burgerIngredients} ${props.className}`}>
+        <section className={`${styles.burgerIngredients} ${props.className ? props.className : ""}`}>
             <h2 className={styles.heading}>Соберите бургер</h2>
             <nav>
                 <ul className={styles.tabList}>
@@ -28,6 +30,11 @@ const BurgerIngredients = props => {
             </div>
         </section>
         );
+}
+
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+    className: PropTypes.string,
 }
 
 export default BurgerIngredients

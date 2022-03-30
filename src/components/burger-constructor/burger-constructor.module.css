@@ -26,7 +26,7 @@
     flex-direction: column;
     padding: 0;
     max-height: 466px;
-    overflow-y: scroll;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 

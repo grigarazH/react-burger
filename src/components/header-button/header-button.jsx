@@ -1,4 +1,5 @@
 import styles from './header-button.module.css';
+import PropTypes from "prop-types";
 
 const HeaderButton = props => {
     const Icon = props.icon;
@@ -8,6 +9,12 @@ const HeaderButton = props => {
             <span className={`${styles.headerButton__title} ${!props.isActive && styles.headerButton__title_inactive}`}>{props.title}</span>
         </button>
     )
+}
+
+HeaderButton.propTypes = {
+    isActive: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    icon: PropTypes.element.isRequired,
 }
 
 export default HeaderButton;
