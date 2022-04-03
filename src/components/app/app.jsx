@@ -15,7 +15,6 @@ function App() {
        fetch(url).then(res => {
           return res.json();
        }).then(({data}) => {
-           console.log(data);
            setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIngredients), ...ingredient})));
        }).catch(err => console.log(err));
     });

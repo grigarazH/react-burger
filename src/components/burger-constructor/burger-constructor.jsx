@@ -8,7 +8,6 @@ import styles from "./burger-constructor.module.css";
 import {ingredientPropType} from "../../utils/data";
 
 const BurgerConstructor = props => {
-    console.log(props);
     return (
         <section className={styles.burgerConstructor}>
             <ul className={styles.ingredientList}>
