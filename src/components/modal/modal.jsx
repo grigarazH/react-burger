@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 import {useEffect} from "react";
+import PropTypes from "prop-types";
 
 const Modal = ({onEscPress, onOverlayClick, children}) => {
     useEffect(() => {
@@ -18,6 +19,12 @@ const Modal = ({onEscPress, onOverlayClick, children}) => {
             <ModalOverlay onClick={onOverlayClick}/>
         </>
     ), document.querySelector("#modals"));
+}
+
+Modal.propTypes = {
+    onEscPress: PropTypes.func.isRequired,
+    onOverlayClick: PropTypes.func.isRequired,
+    children: PropTypes.arrayOf(PropTypes.element),
 }
 
 export default Modal;

@@ -1,6 +1,7 @@
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './order-details.module.css';
 import orderDone from '../../images/done.svg';
+import PropTypes from "prop-types";
 
 const OrderDetails = ({onCloseClick}) => {
     return (
@@ -13,6 +14,10 @@ const OrderDetails = ({onCloseClick}) => {
             <p className={styles.orderDetails__waitSubtitle}>Дождитесь готовности на орбитальной станции</p>
         </>
     )
+}
+
+OrderDetails.propTypes = {
+    onCloseClick: PropTypes.func.isRequired,
 }
 
 export default OrderDetails;

@@ -3,7 +3,7 @@ import {BurgerIcon, MenuIcon, ProfileIcon} from "@ya.praktikum/react-developer-b
 import styles from "./app-header.module.css";
 import HeaderButton from "../header-button/header-button";
 
-const AppHeader = props => {
+const AppHeader = () => {
     return (
         <header className={styles.appHeader}>
             <nav className={styles.appHeader__nav}>

@@ -7,14 +7,14 @@ import IngredientCategory from "../ingredient-category/ingredient-category";
 import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/data";
 
-const BurgerIngredients = props => {
+const BurgerIngredients = ({ingredients, onSelect, className}) => {
     const [currentTab, setCurrentTab] = useState("buns");
 
     const onTabClick = tabValue => {
         setCurrentTab(tabValue);
     }
     return (
-        <section className={`${styles.burgerIngredients} ${props.className ? props.className : ""}`}>
+        <section className={`${styles.burgerIngredients} ${className ? className : ""}`}>
             <h2 className={styles.heading}>Соберите бургер</h2>
             <nav>
                 <ul className={styles.tabList}>
@@ -24,9 +24,9 @@ const BurgerIngredients = props => {
                 </ul>
             </nav>
             <div className={styles.ingredientList}>
-                <IngredientCategory className={styles.category} title={"Булки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "bun")} onSelect={props.onSelect}/>
-                <IngredientCategory className={styles.category} title={"Соусы"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "sauce")} onSelect={props.onSelect}/>
-                <IngredientCategory className={styles.category} title={"Начинки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "main")} onSelect={props.onSelect}/>
+                <IngredientCategory className={styles.category} title={"Булки"} ingredients={ingredients.filter(ingredient => ingredient.type === "bun")} onSelect={onSelect}/>
+                <IngredientCategory className={styles.category} title={"Соусы"} ingredients={ingredients.filter(ingredient => ingredient.type === "sauce")} onSelect={onSelect}/>
+                <IngredientCategory className={styles.category} title={"Начинки"} ingredients={ingredients.filter(ingredient => ingredient.type === "main")} onSelect={onSelect}/>
             </div>
         </section>
         );
@@ -35,6 +35,7 @@ const BurgerIngredients = props => {
 BurgerIngredients.propTypes = {
     ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
     className: PropTypes.string,
+    onSelect: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients

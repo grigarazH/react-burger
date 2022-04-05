@@ -2,8 +2,8 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
 import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import styles from "./ingredient-details.module.css";
-import {useEffect, useRef} from "react";
-import burgerIngredients from "../burger-ingredients/burger-ingredients";
+import {ingredientPropType} from "../../utils/data";
+import PropTypes from "prop-types";
 
 const IngredientDetails = ({ingredient, onCloseClick}) => {
     return (
@@ -36,6 +36,11 @@ const IngredientDetails = ({ingredient, onCloseClick}) => {
             </div>
         </>
     )
+}
+
+IngredientDetails.propTypes = {
+    ingredient: ingredientPropType.isRequired,
+    onCloseClick: PropTypes.func.isRequired,
 }
 
 export default IngredientDetails;

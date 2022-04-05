@@ -5,13 +5,13 @@ import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from "./ingredient-category.module.css";
 
-const IngredientCategory = props => {
+const IngredientCategory = ({className, title, ingredients, onSelect}) => {
     return (
-        <section className={props.className}>
-            <h3 className={styles.title}>{props.title}</h3>
+        <section className={className}>
+            <h3 className={styles.title}>{title}</h3>
             <ul className={styles.ingredientList}>
-                {props.ingredients.map((ingredient) => (
-                    <BurgerIngredient ingredient={ingredient} key={ingredient._id} onSelect={props.onSelect} onCloseModal={props.onCloseModal}/>
+                {ingredients.map((ingredient) => (
+                    <BurgerIngredient ingredient={ingredient} key={ingredient._id} onSelect={onSelect}/>
                 ))}
             </ul>
         </section>
@@ -26,7 +26,8 @@ IngredientCategory.propTypes = {
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         image: PropTypes.string.isRequired,
-    })).isRequired
+    })).isRequired,
+    onSelect: PropTypes.func.isRequired,
 }
 
 export default IngredientCategory
