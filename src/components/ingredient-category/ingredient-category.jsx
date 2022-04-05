@@ -11,7 +11,7 @@ const IngredientCategory = props => {
             <h3 className={styles.title}>{props.title}</h3>
             <ul className={styles.ingredientList}>
                 {props.ingredients.map((ingredient) => (
-                    <BurgerIngredient ingredient={ingredient} key={ingredient._id}/>
+                    <BurgerIngredient ingredient={ingredient} key={ingredient._id} onSelect={props.onSelect} onCloseModal={props.onCloseModal}/>
                 ))}
             </ul>
         </section>

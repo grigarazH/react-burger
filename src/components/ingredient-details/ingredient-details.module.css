@@ -1,0 +1,68 @@
+.ingredientDetails__heading {
+    composes: ml-10 mr-10 mt-10 from global;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.ingredientDetails__title {
+    composes: text text_type_main-large from global;
+    margin: 0;
+    color: #f2f2f3;
+}
+
+.ingredientDetails__closeIcon:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.ingredientDetails__info {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.ingredientDetails__image {
+    width: 480px;
+    height: 240px;
+}
+
+.ingredientDetails__name {
+    composes: text text_type_main-medium from global;
+    text-align: center;
+    color: #f2f2f3;
+}
+
+.ingredientDetails__properties {
+    composes: mt-8 mb-15 from global;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 145px 131.67px 131.67px 111.67px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.ingredientDetails__property {
+    composes: mr-5 from global;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.ingredientDetails__property:last-of-type {
+    margin: 0;
+}
+
+.ingredientDetails__propertyName {
+    composes: text text_type_main-default from global;
+    color: #8585ad;
+    text-align: center;
+}
+
+.ingredientDetails__propertyValue {
+    composes: text text_type_digits-default from global;
+    color: #8585ad;
+    text-align: center;
+}

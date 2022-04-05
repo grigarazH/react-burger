@@ -24,9 +24,9 @@ const BurgerIngredients = props => {
                 </ul>
             </nav>
             <div className={styles.ingredientList}>
-                <IngredientCategory className={styles.category} title={"Булки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "bun")}/>
-                <IngredientCategory className={styles.category} title={"Соусы"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "sauce")}/>
-                <IngredientCategory className={styles.category} title={"Начинки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "main")}/>
+                <IngredientCategory className={styles.category} title={"Булки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "bun")} onSelect={props.onSelect}/>
+                <IngredientCategory className={styles.category} title={"Соусы"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "sauce")} onSelect={props.onSelect}/>
+                <IngredientCategory className={styles.category} title={"Начинки"} ingredients={props.ingredients.filter(ingredient => ingredient.type === "main")} onSelect={props.onSelect}/>
             </div>
         </section>
         );

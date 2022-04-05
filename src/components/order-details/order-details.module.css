@@ -1,0 +1,39 @@
+.orderDetails__closeIcon {
+    composes: mt-15 mr-10 from global;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.orderDetails__closeIcon:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.orderDetails__number {
+    composes: text text_type_digits-large mt-30 from global;
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+    color: #f2f2f3;
+}
+
+.orderDetails__numberSubtitle {
+    composes: text text_type_main-default mt-8 from global;
+    color: #f2f2f3;
+}
+
+.orderDetails__doneIcon {
+    composes: mt-15 from global;
+}
+
+.orderDetails__doneSubtitle {
+    composes: text text_type_main-default mt-15 from global;
+    color: #f2f2f3;
+}
+
+.orderDetails__waitSubtitle {
+    composes: text text_type_main-default mt-2 mb-30 from global;
+    color: #8585ad;
+}
+
+
+

@@ -9,14 +9,14 @@ const Modal = ({onEscPress, onOverlayClick, children}) => {
         return () => {
             document.removeEventListener("keydown", onEscPress);
         }
-    });
+    }, [onEscPress]);
     return ReactDOM.createPortal((
-        <div className={styles.modal}>
-            <div className={styles.modal__container}>
+        <>
+            <div className={styles.modal}>
                 {children}
             </div>
             <ModalOverlay onClick={onOverlayClick}/>
-        </div>
+        </>
     ), document.querySelector("#modals"));
 }
 
