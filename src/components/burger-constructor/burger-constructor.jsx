@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import styles from "./burger-constructor.module.css";
 import {ingredientPropType} from "../../utils/data";
 

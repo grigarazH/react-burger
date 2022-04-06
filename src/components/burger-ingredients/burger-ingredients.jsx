@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "../ingredient-category/ingredient-category";
 import PropTypes from "prop-types";

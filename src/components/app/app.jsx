@@ -3,8 +3,6 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import {constructorData, getIngredientAmount} from "../../utils/data";
 import AppHeader from "../app-header/app-header";
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from './app.module.css';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";

@@ -1,5 +1,3 @@
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
-import "@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css";
 import styles from "./ingredient-details.module.css";
 import {ingredientPropType} from "../../utils/data";
 
