@@ -22,7 +22,7 @@ const IngredientCategory = ({className, title, ingredients, onSelect}) => {
 IngredientCategory.propTypes = {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
-    ingredients: ingredientPropType.isRequired,
+    ingredients: PropTypes.arrayOf(ingredientPropType),
     onSelect: PropTypes.func.isRequired,
 }
 

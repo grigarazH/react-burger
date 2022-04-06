@@ -27,8 +27,7 @@ const Modal = ({onClose, children}) => {
 }
 
 Modal.propTypes = {
-    onEscPress: PropTypes.func.isRequired,
-    onOverlayClick: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     children: PropTypes.oneOfType([
         PropTypes.node,
         PropTypes.arrayOf(PropTypes.node),
