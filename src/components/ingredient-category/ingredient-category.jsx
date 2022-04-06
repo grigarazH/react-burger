@@ -4,6 +4,7 @@ import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from "./ingredient-category.module.css";
+import {ingredientPropType} from "../../utils/data";
 
 const IngredientCategory = ({className, title, ingredients, onSelect}) => {
     return (
@@ -21,12 +22,7 @@ const IngredientCategory = ({className, title, ingredients, onSelect}) => {
 IngredientCategory.propTypes = {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-    })).isRequired,
+    ingredients: ingredientPropType.isRequired,
     onSelect: PropTypes.func.isRequired,
 }
 
