@@ -6,7 +6,6 @@ import AppHeader from "../app-header/app-header";
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 import '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 import styles from './app.module.css';
-import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
@@ -20,9 +19,6 @@ function App() {
     const closeAllModals = () => {
         setIngredientModalActive(false);
         setOrderModalActive(false);
-    }
-    const handleEsc = e => {
-        e.key === "Escape" && closeAllModals();
     }
     const selectIngredient = ingredient => {
         setCurrentIngredient(ingredient);
@@ -54,11 +50,11 @@ function App() {
                                onOrder={orderBurger}
             />
         </main>
-        {isIngredientModalActive && <Modal onEscPress={handleEsc} onOverlayClick={closeAllModals}>
-            <IngredientDetails ingredient={currentIngredient} onCloseClick={closeAllModals}/>
+        {isIngredientModalActive && <Modal onClose={closeAllModals}>
+            <IngredientDetails ingredient={currentIngredient}/>
         </Modal>}
-        {isOrderModalActive && <Modal onEscPress={handleEsc} onOverlayClick={closeAllModals}>
-            <OrderDetails onCloseClick={closeAllModals}/>
+        {isOrderModalActive && <Modal onClose={closeAllModals}>
+            <OrderDetails/>
         </Modal>}
 
     </div>

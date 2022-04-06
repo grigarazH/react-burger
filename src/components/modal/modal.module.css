@@ -14,3 +14,15 @@
     z-index: 2;
     min-width: 720px;
 }
+
+.modal__closeIcon {
+    composes: mt-15 mr-10 from global;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal__closeIcon:hover {
+    cursor: pointer;
+    opacity: .7;
+}
