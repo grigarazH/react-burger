@@ -34,7 +34,10 @@ function App() {
     useEffect(() => {
        const url = "https://norma.nomoreparties.space/api/ingredients";
        fetch(url).then(res => {
-          return res.json();
+           if(res.ok) {
+               return res.json();
+           }
+           return Promise.reject(`Ошибка ${res.status}`);
        }).then(({data}) => {
            setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIngredients), ...ingredient})));
        }).catch(err => console.log(err));
