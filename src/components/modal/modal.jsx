@@ -6,13 +6,13 @@ import PropTypes from "prop-types";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const Modal = ({onClose, children}) => {
-    const escHandler = e => {
+    const handleEsc = e => {
         e.key === "Escape" && onClose();
     }
     useEffect(() => {
-        document.addEventListener("keydown", escHandler);
+        document.addEventListener("keydown", handleEsc);
         return () => {
-            document.removeEventListener("keydown", escHandler);
+            document.removeEventListener("keydown", handleEsc);
         }
     }, [onClose]);
     return ReactDOM.createPortal((
