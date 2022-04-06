@@ -38,7 +38,7 @@ function App() {
        }).then(({data}) => {
            setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIngredients), ...ingredient})));
        }).catch(err => console.log(err));
-    });
+    }, [constructorIngredients]);
 
     return (
     <div className={styles.app}>

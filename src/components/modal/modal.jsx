@@ -24,7 +24,10 @@ const Modal = ({onEscPress, onOverlayClick, children}) => {
 Modal.propTypes = {
     onEscPress: PropTypes.func.isRequired,
     onOverlayClick: PropTypes.func.isRequired,
-    children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.arrayOf(PropTypes.node),
+    ])
 }
 
 export default Modal;
