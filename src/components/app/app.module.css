@@ -1,0 +1,12 @@
+.app {
+    background-color: #131316;
+}
+
+.app__content {
+    display: flex;
+    justify-content: center;
+}
+
+.app__ingredients {
+    composes: mr-10 from global;
+}
