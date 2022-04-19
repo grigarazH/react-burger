@@ -1,20 +1,28 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import {ingredientPropType} from "../../utils/data";
+import {BurgerConstructorContext} from "../../services/burger-constructor-context";
 
-const BurgerConstructor = ({topIngredient, middleIngredients, bottomIngredient, onOrder}) => {
+const BurgerConstructor = ({onOrder}) => {
+    const {constructorIngredients} = useContext(BurgerConstructorContext);
+    const [bunIngredient, setBunIngredient] = useState(null);
+    const [middleIngredients, setMiddleIngredients] = useState([]);
+    useEffect(() => {
+        setBunIngredient(constructorIngredients.find(ingredient => ingredient.type === "bun"));
+        setMiddleIngredients(constructorIngredients.filter(ingredient => ingredient.type !== "bun"));
+    }, [constructorIngredients]);
     return (
         <section className={styles.burgerConstructor}>
             <ul className={styles.ingredientList}>
-                <li className={styles.ingredient}><ConstructorElement
+                {bunIngredient && <li className={styles.ingredient}><ConstructorElement
                     type="top"
                     isLocked={true}
-                    text={`${topIngredient.name} (верх)`}
-                    thumbnail={topIngredient.image}
-                    price={topIngredient.price}/></li>
+                    text={`${bunIngredient.name} (верх)`}
+                    thumbnail={bunIngredient.image}
+                    price={bunIngredient.price}/></li>}
                 <li><ul className={styles.middleIngredientsList}>
                     {middleIngredients.map((ingredient, index) => (
                         <li key={index} className={`${styles.middleIngredient}`}>
@@ -26,12 +34,13 @@ const BurgerConstructor = ({topIngredient, middleIngredients, bottomIngredient, 
                                 price={ingredient.price}/></li>
                     ))}
                 </ul></li>
-                <li className={styles.ingredient}><ConstructorElement
-                    type="bottom"
-                    isLocked={true}
-                    text={`${bottomIngredient.name} (низ)`}
-                    thumbnail={bottomIngredient.image}
-                    price={bottomIngredient.price} /></li>
+                {bunIngredient &&
+                    <li className={styles.ingredient}><ConstructorElement
+                        type="bottom"
+                        isLocked={true}
+                        text={`${bunIngredient.name} (низ)`}
+                        thumbnail={bunIngredient.image}
+                        price={bunIngredient.price} /></li>}
             </ul>
             <div className={styles.orderInfo}>
                 <p className={styles.orderPrice}>634 <span className={styles.orderPriceIcon}>
@@ -45,9 +54,6 @@ const BurgerConstructor = ({topIngredient, middleIngredients, bottomIngredient, 
 
 
 BurgerConstructor.propTypes = {
-    topIngredient: ingredientPropType.isRequired,
-    middleIngredients: PropTypes.arrayOf(ingredientPropType).isRequired,
-    bottomIngredient: ingredientPropType.isRequired,
     onOrder: PropTypes.func.isRequired,
 };
 
