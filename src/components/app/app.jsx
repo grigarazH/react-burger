@@ -29,15 +29,19 @@ function App() {
     useEffect(() => {
        const url = "https://norma.nomoreparties.space/api/ingredients";
        fetch(url).then(res => {
-           console.log(res);
            if(res.ok) {
                return res.json();
            }
            return Promise.reject(`Ошибка ${res.status}`);
        }).then(({data}) => {
-           const dataConstructorIngredients = constructorData.ingredients.map(ingredient => data.find(dataIngredient => dataIngredient._id === ingredient));
+           console.log(data);
+           const dataConstructorIngredients = constructorData.ingredients.map(ingredient => data.find(dataIngredient => {
+               console.log(dataIngredient._id === ingredient);
+               return dataIngredient._id === ingredient;
+           }));
+           console.log(dataConstructorIngredients);
            setConstructorIngredients(dataConstructorIngredients);
-           setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, dataConstructorIngredients), ...ingredient})));
+           setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorData), ...ingredient})));
        }).catch(err => console.log(err));
     }, [constructorIngredients]);
 
