@@ -213,9 +213,7 @@ export const ingredientData = [
     }
 ];
 
-export const constructorData = {
-    ingredients: ["60d3b41abdacab0026a733c6", "60d3b41abdacab0026a733ce","60d3b41abdacab0026a733c9", "60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d0", "60d3b41abdacab0026a733d0"],
-};
+export const constructorIds = ["60d3b41abdacab0026a733c6", "60d3b41abdacab0026a733ce","60d3b41abdacab0026a733c9", "60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733d0", "60d3b41abdacab0026a733d0"];
 
 export const ingredientPropType = PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -233,8 +231,8 @@ export const ingredientPropType = PropTypes.shape({
 });
 
 export const getIngredientAmount = (id, constructorData) => {
-    return constructorData.ingredients.reduce((previousValue, currentValue) => {
-        if(currentValue._id === id) {
+    return constructorIds.reduce((previousValue, currentValue) => {
+        if(currentValue === id) {
             return previousValue + 1;
         } else {
             return previousValue;

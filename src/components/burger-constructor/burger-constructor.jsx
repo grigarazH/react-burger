@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
-import {ingredientPropType} from "../../utils/data";
 import {BurgerConstructorContext} from "../../services/burger-constructor-context";
 
 const BurgerConstructor = ({onOrder}) => {
-    const {constructorIngredients} = useContext(BurgerConstructorContext);
-    const [bunIngredient, setBunIngredient] = useState(null);
+    const constructorIngredients = useContext(BurgerConstructorContext);
+    const [bunIngredient, setBunIngredient] = useState(undefined);
     const [middleIngredients, setMiddleIngredients] = useState([]);
     useEffect(() => {
         console.log(constructorIngredients);
@@ -44,9 +43,11 @@ const BurgerConstructor = ({onOrder}) => {
                         price={bunIngredient.price} /></li>}
             </ul>
             <div className={styles.orderInfo}>
-                <p className={styles.orderPrice}>634 <span className={styles.orderPriceIcon}>
+                {bunIngredient && middleIngredients.length > 0 && (
+                    <p className={styles.orderPrice}>{bunIngredient.price * 2 + middleIngredients.reduce(((previousValue, currentValue) => previousValue + currentValue.price), 0)} <span className={styles.orderPriceIcon}>
                     <CurrencyIcon type={'primary'}/>
                 </span></p>
+                )}
                 <Button onClick={onOrder}>Оформить заказ</Button>
             </div>
         </section>

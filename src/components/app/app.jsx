@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import {constructorData, getIngredientAmount} from "../../utils/data";
+import {constructorIds, getIngredientAmount} from "../../utils/data";
 import AppHeader from "../app-header/app-header";
 import styles from './app.module.css';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import {BurgerConstructorContext} from "../../services/burger-constructor-context";
+import {BurgerIngredientsContext} from "../../services/burger-ingredients-context";
 
 function App() {
     const [ingredientData, setIngredientData] = useState([]);
@@ -34,19 +35,16 @@ function App() {
            }
            return Promise.reject(`Ошибка ${res.status}`);
        }).then(({data}) => {
-           console.log(data);
-           const dataConstructorIngredients = constructorData.ingredients.map(ingredient => data.find(dataIngredient => {
-               console.log(dataIngredient._id === ingredient);
-               return dataIngredient._id === ingredient;
-           }));
-           console.log(dataConstructorIngredients);
-           setConstructorIngredients(dataConstructorIngredients);
-           setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorData), ...ingredient})));
+           setConstructorIngredients(constructorIds.map(id => data.find(ingredient => {
+               return ingredient._id === id;
+           })));
+           setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIds), ...ingredient})));
        }).catch(err => console.log(err));
-    }, [constructorIngredients]);
+    }, [constructorIngredients, ingredientData]);
 
     return (
-        <BurgerConstructorContext.Provider value={{constructorIngredients, setConstructorIngredients}}>
+        <BurgerIngredientsContext.Provider value={ingredientData}>
+        <BurgerConstructorContext.Provider value={constructorIngredients}>
             <div className={styles.app}>
                 <AppHeader/>
                 <main className={styles.app__content}>
@@ -61,7 +59,7 @@ function App() {
                 </Modal>}
             </div>
         </BurgerConstructorContext.Provider>
-
+        </BurgerIngredientsContext.Provider>
   );
 }
 

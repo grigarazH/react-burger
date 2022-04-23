@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "../ingredient-category/ingredient-category";
 import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/data";
+import {BurgerIngredientsContext} from "../../services/burger-ingredients-context";
 
-const BurgerIngredients = ({ingredients, onSelect, className}) => {
+const BurgerIngredients = ({onSelect, className}) => {
     const [currentTab, setCurrentTab] = useState("buns");
-
+    const ingredients = useContext(BurgerIngredientsContext);
     const onTabClick = tabValue => {
         setCurrentTab(tabValue);
     }
