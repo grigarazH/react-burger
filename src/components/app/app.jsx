@@ -9,6 +9,8 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import {BurgerConstructorContext} from "../../services/burger-constructor-context";
 import {BurgerIngredientsContext} from "../../services/burger-ingredients-context";
+import OrderContext from "../../services/order-context";
+import BurgerApi from "../../services/burger-api";
 
 function App() {
     const [ingredientData, setIngredientData] = useState([]);
@@ -16,6 +18,7 @@ function App() {
     const [isIngredientModalActive, setIngredientModalActive] = useState(false);
     const [isOrderModalActive, setOrderModalActive] = useState(false);
     const [currentIngredient, setCurrentIngredient] = useState(null);
+    const [orderData, setOrderData] = useState(null);
     const closeAllModals = () => {
         setIngredientModalActive(false);
         setOrderModalActive(false);
@@ -25,16 +28,13 @@ function App() {
         setIngredientModalActive(true);
     }
     const orderBurger = () => {
-        setOrderModalActive(true);
+        BurgerApi.postOrder(constructorIngredients.map(ingredient => ingredient._id)).then((data) => {
+           setOrderData({number: data.order.number});
+           setOrderModalActive(true);
+        }).catch(err => console.log(err));
     }
     useEffect(() => {
-       const url = "https://norma.nomoreparties.space/api/ingredients";
-       fetch(url).then(res => {
-           if(res.ok) {
-               return res.json();
-           }
-           return Promise.reject(`Ошибка ${res.status}`);
-       }).then(({data}) => {
+       BurgerApi.getIngredients().then(({data}) => {
            setConstructorIngredients(constructorIds.map(id => data.find(ingredient => {
                return ingredient._id === id;
            })));
@@ -45,6 +45,7 @@ function App() {
     return (
         <BurgerIngredientsContext.Provider value={ingredientData}>
         <BurgerConstructorContext.Provider value={constructorIngredients}>
+            <OrderContext.Provider value={orderData}>
             <div className={styles.app}>
                 <AppHeader/>
                 <main className={styles.app__content}>
@@ -58,6 +59,7 @@ function App() {
                     <OrderDetails/>
                 </Modal>}
             </div>
+         </OrderContext.Provider>
         </BurgerConstructorContext.Provider>
         </BurgerIngredientsContext.Provider>
   );

@@ -10,7 +10,6 @@ const BurgerConstructor = ({onOrder}) => {
     const [bunIngredient, setBunIngredient] = useState(undefined);
     const [middleIngredients, setMiddleIngredients] = useState([]);
     useEffect(() => {
-        console.log(constructorIngredients);
         setBunIngredient(constructorIngredients.find(ingredient => ingredient.type === "bun"));
         setMiddleIngredients(constructorIngredients.filter(ingredient => ingredient.type !== "bun"));
     }, [constructorIngredients]);

@@ -32,7 +32,6 @@ const BurgerIngredients = ({onSelect, className}) => {
 }
 
 BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
     className: PropTypes.string,
     onSelect: PropTypes.func.isRequired,
 }
