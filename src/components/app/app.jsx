@@ -40,28 +40,28 @@ function App() {
            })));
            setIngredientData(data.map(ingredient => ({amount: getIngredientAmount(ingredient._id, constructorIds), ...ingredient})));
        }).catch(err => console.log(err));
-    }, [constructorIngredients, ingredientData]);
+    }, []);
 
     return (
-        <BurgerIngredientsContext.Provider value={ingredientData}>
-        <BurgerConstructorContext.Provider value={constructorIngredients}>
-            <OrderContext.Provider value={orderData}>
-            <div className={styles.app}>
-                <AppHeader/>
-                <main className={styles.app__content}>
-                    <BurgerIngredients ingredients={ingredientData} className={styles.app__ingredients} onSelect={selectIngredient}/>
-                    <BurgerConstructor onOrder={orderBurger}/>
-                </main>
-                {isIngredientModalActive && <Modal onClose={closeAllModals}>
-                    <IngredientDetails ingredient={currentIngredient}/>
-                </Modal>}
-                {isOrderModalActive && <Modal onClose={closeAllModals}>
-                    <OrderDetails/>
-                </Modal>}
-            </div>
-         </OrderContext.Provider>
-        </BurgerConstructorContext.Provider>
-        </BurgerIngredientsContext.Provider>
+        <div className={styles.app}>
+            <AppHeader/>
+            <BurgerIngredientsContext.Provider value={ingredientData}>
+                <BurgerConstructorContext.Provider value={constructorIngredients}>
+                    <OrderContext.Provider value={orderData}>
+                        <main className={styles.app__content}>
+                            <BurgerIngredients className={styles.app__ingredients} onSelect={selectIngredient}/>
+                            <BurgerConstructor onOrder={orderBurger}/>
+                        </main>
+                        {isIngredientModalActive && <Modal onClose={closeAllModals}>
+                            <IngredientDetails ingredient={currentIngredient}/>
+                        </Modal>}
+                        {isOrderModalActive && <Modal onClose={closeAllModals}>
+                            <OrderDetails/>
+                        </Modal>}
+                    </OrderContext.Provider>
+                </BurgerConstructorContext.Provider>
+            </BurgerIngredientsContext.Provider>
+        </div>
   );
 }
 
