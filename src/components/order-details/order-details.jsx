@@ -1,11 +1,9 @@
 import styles from './order-details.module.css';
 import orderDone from '../../images/done.svg';
-import OrderContext from "../../services/order-context";
-import {useContext} from "react";
-import orderContext from "../../services/order-context";
+import {useSelector} from "react-redux";
 
 const OrderDetails = () => {
-    const orderData = useContext(orderContext);
+    const orderData = useSelector(store => store.order.order);
 
     return (
         <>

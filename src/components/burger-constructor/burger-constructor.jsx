@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
-import {BurgerConstructorContext} from "../../services/burger-constructor-context";
+import {useSelector} from "react-redux";
 
 const BurgerConstructor = ({onOrder}) => {
-    const constructorIngredients = useContext(BurgerConstructorContext);
+    const constructorIngredients = useSelector(store => store.constructorIngredients);
     const [bunIngredient, setBunIngredient] = useState(undefined);
     const [middleIngredients, setMiddleIngredients] = useState([]);
     useEffect(() => {

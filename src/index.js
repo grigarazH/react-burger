@@ -7,6 +7,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {rootReducer} from "./services/reducers";
 import {Provider} from "react-redux";
 
+
 const store = configureStore({reducer: rootReducer});
 
 ReactDOM.render(

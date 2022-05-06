@@ -3,11 +3,11 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import IngredientCategory from "../ingredient-category/ingredient-category";
 import PropTypes from "prop-types";
-import {BurgerIngredientsContext} from "../../services/burger-ingredients-context";
+import {useSelector} from "react-redux";
 
 const BurgerIngredients = ({onSelect, className}) => {
     const [currentTab, setCurrentTab] = useState("buns");
-    const ingredients = useContext(BurgerIngredientsContext);
+    const ingredients = useSelector(store => store.ingredients.items);
     const onTabClick = tabValue => {
         setCurrentTab(tabValue);
     }
