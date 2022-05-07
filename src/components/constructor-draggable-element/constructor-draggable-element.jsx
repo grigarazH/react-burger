@@ -1,5 +1,5 @@
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useCallback, useMemo} from "react";
+import React, {useCallback} from "react";
 import styles from './constructor-draggable-element.module.css';
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
