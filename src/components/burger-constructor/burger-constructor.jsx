@@ -4,8 +4,10 @@ import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-u
 import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import {useDispatch, useSelector} from "react-redux";
-import {useDrop} from "react-dnd";
+import {useDrag, useDrop} from "react-dnd";
 import {ADD_INGREDIENT, DELETE_INGREDIENT, SET_BUN} from "../../services/actions/constructor";
+import {INCREMENT_INGREDIENT, SET_BUNS_AMOUNT} from "../../services/actions/ingredients";
+import ConstructorDraggableElement from "../constructor-draggable-element/constructor-draggable-element";
 
 const BurgerConstructor = ({onOrder}) => {
     const constructorIngredients = useSelector(store => store.constructorIngredients.items);
@@ -14,13 +16,15 @@ const BurgerConstructor = ({onOrder}) => {
     const ingredients = useSelector(store => store.ingredients.items);
     const dispatch = useDispatch();
     const [, dropTarget] = useDrop({
-       accept: ["ingredient"],
+       accept: "ingredient",
        drop: item => {
            const ingredient = ingredients.find(ingredient => ingredient._id === item.id);
            if(ingredient.type === "bun") {
                dispatch({type: SET_BUN, ingredient: ingredient});
+               dispatch({type: SET_BUNS_AMOUNT, id: ingredient._id});
            }else{
                dispatch({type: ADD_INGREDIENT, ingredient: ingredient});
+               dispatch({type: INCREMENT_INGREDIENT, id: ingredient._id});
            }
        }
     });
@@ -48,16 +52,8 @@ const BurgerConstructor = ({onOrder}) => {
                 )}
                 {middleIngredients.length > 0 && (
                     <li><ul className={styles.middleIngredientsList}>
-                        {middleIngredients.map((ingredient, index) => (
-                            <li key={index} className={`${styles.middleIngredient}`}>
-                                <DragIcon type={"primary"}/>
-                                <ConstructorElement
-                                    isLocked={false}
-                                    text={ingredient.name}
-                                    thumbnail={ingredient.image}
-                                    price={ingredient.price}
-                                    handleClose={() => onDeleteIngredient(ingredient.index)}
-                                /></li>
+                        {middleIngredients.map((ingredient) => (
+                            <ConstructorDraggableElement key={ingredient.index} ingredient={ingredient}/>
                         ))}
                     </ul></li>
                 )}

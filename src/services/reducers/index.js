@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
 
 import {
+    DECREMENT_INGREDIENT,
     GET_INGREDIENTS_ERROR,
-    GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, UPDATE_INGREDIENTS,
+    GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, INCREMENT_INGREDIENT, SET_BUNS_AMOUNT, UPDATE_INGREDIENTS,
 } from "../actions/ingredients";
 import {ADD_INGREDIENT, DELETE_INGREDIENT, SET_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../actions/constructor";
 import {SELECT_INGREDIENT, DESELECT_INGREDIENT} from "../actions/current-ingredient";
@@ -57,6 +58,21 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
             return {
                 ...state,
                 items: action.ingredients,
+            };
+        case INCREMENT_INGREDIENT:
+            return {
+                ...state,
+                items: state.items.map(ingredient => ingredient._id === action.id ? {...ingredient, amount: ingredient.amount ? ingredient.amount + 1 : 1} : ingredient),
+            };
+        case DECREMENT_INGREDIENT:
+            return {
+                ...state,
+                items: state.items.map(ingredient => ingredient._id === action.id ? {...ingredient, amount: ingredient.amount && ingredient.amount > 0 ? ingredient.amount - 1 : 0} : ingredient),
+            };
+        case SET_BUNS_AMOUNT:
+            return {
+                ...state,
+                items: state.items.map(ingredient => ingredient.type === "bun" ? ingredient._id === action.id ? {...ingredient, amount: 2} : {...ingredient, amount: 0} : ingredient),
             };
         default:
             return state;
