@@ -3,7 +3,7 @@ import {ingredientPropType} from "../../utils/data";
 import {useSelector} from "react-redux";
 
 const IngredientDetails = () => {
-    const ingredient = useSelector(store => store.ingredient);
+    const ingredient = useSelector(store => store.currentIngredient);
     return (
         <>
             <h2 className={styles.ingredientDetails__title}>Детали ингредиента</h2>
