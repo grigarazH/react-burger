@@ -12,6 +12,8 @@ import {getIngredients, UPDATE_INGREDIENTS} from "../../services/actions/ingredi
 import {SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/constructor";
 import {DESELECT_INGREDIENT, SELECT_INGREDIENT} from "../../services/actions/current-ingredient";
 import {CLEAR_ORDER, postOrder} from "../../services/actions/order";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
 
 function App() {
     const [isIngredientModalActive, setIngredientModalActive] = useState(false);
@@ -20,7 +22,7 @@ function App() {
     const orderData = useSelector(store => store.order.order);
     const dispatch = useDispatch();
     const ingredients = useSelector(store => store.ingredients.items);
-    const constructorIngredients = useSelector(store => store.constructorIngredients);
+    const constructorIngredients = useSelector(store => store.constructorIngredients.items);
     const closeAllModals = () => {
         dispatch({type: DESELECT_INGREDIENT});
         dispatch({type: CLEAR_ORDER});
@@ -39,30 +41,14 @@ function App() {
        dispatch(getIngredients());
     }, [dispatch]);
 
-
-    useEffect(() => {
-        if(ingredients.length > 0 && constructorIngredients.length === 0) {
-            const initialConstructorIngredients = constructorIds.map(id => ingredients.find(ingredient => ingredient._id === id));
-            dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, ingredients: initialConstructorIngredients});
-            dispatch({type: UPDATE_INGREDIENTS, ingredients: ingredients.map(ingredient => {
-                let amount = 0;
-                initialConstructorIngredients.forEach(constructorIngredient => {
-                    if(constructorIngredient._id === ingredient._id) amount++;
-                });
-                return {
-                    ...ingredient,
-                    amount: amount
-                };
-            })});
-        }
-    }, [ingredients]);
-
     return (
         <div className={styles.app}>
             <AppHeader/>
             <main className={styles.app__content}>
+                <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients className={styles.app__ingredients} onSelect={selectIngredient}/>
                 <BurgerConstructor onOrder={orderBurger}/>
+                </DndProvider>
             </main>
             {isIngredientModalActive && currentIngredient && <Modal onClose={closeAllModals}>
                 <IngredientDetails ingredient={currentIngredient}/>

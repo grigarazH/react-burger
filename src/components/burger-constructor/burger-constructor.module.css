@@ -2,6 +2,7 @@
     max-width: 600px;
     composes: pt-25 pl-4 from global;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .ingredientList {
@@ -16,7 +17,13 @@
 
 .ingredient {
     composes: pl-8 pr-4 from global;
+    width: 100%;
     box-sizing: border-box;
+}
+
+.ingredientPlaceholder {
+    display: flex;
+    align-items: center;
 }
 
 .middleIngredientsList {
@@ -35,7 +42,7 @@
 }
 
 .middleIngredient {
-    composes: mb-4 pl-8 from global;
+    composes: mb-4 pl-8 pr-4 from global;
     position: relative;
     display: flex;
     flex-direction: column;

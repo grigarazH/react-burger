@@ -7,7 +7,7 @@ export const CLEAR_ORDER = "CLEAR_ORDER";
 
 export const postOrder = (ingredients) => dispatch => {
     dispatch({type: POST_ORDER_REQUEST});
-    BurgerApi.postOrder(ingredients)
+    BurgerApi.postOrder(ingredients.map(ingredient => ingredient._id))
         .then(data => {
            dispatch({
                type: POST_ORDER_SUCCESS,

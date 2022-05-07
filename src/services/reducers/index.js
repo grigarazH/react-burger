@@ -4,7 +4,7 @@ import {
     GET_INGREDIENTS_ERROR,
     GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, UPDATE_INGREDIENTS,
 } from "../actions/ingredients";
-import {SET_CONSTRUCTOR_INGREDIENTS} from "../actions/constructor";
+import {ADD_INGREDIENT, DELETE_INGREDIENT, SET_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../actions/constructor";
 import {SELECT_INGREDIENT, DESELECT_INGREDIENT} from "../actions/current-ingredient";
 import {
     CLEAR_ORDER,
@@ -18,6 +18,11 @@ const ingredientsInitialState = {
     getIngredientsRequest: false,
     getIngredientsError: false,
     error: null,
+}
+
+const constructorInitialState = {
+    items: [],
+    lastIndex: 0,
 }
 
 const orderInitialState = {
@@ -58,10 +63,27 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
     }
 }
 
-const constructorReducer = (state = [], action) => {
+const constructorReducer = (state = constructorInitialState, action) => {
     switch(action.type) {
         case SET_CONSTRUCTOR_INGREDIENTS:
-            return action.ingredients;
+            return {...state,
+            items: action.ingredients};
+        case SET_BUN:
+            return {
+                ...state,
+                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined}],
+            };
+        case ADD_INGREDIENT:
+            return {
+                ...state,
+                items: [...state.items, {...action.ingredient, amount: undefined, index: state.lastIndex}],
+                lastIndex: state.lastIndex + 1,
+            };
+        case DELETE_INGREDIENT:
+            return {
+                ...state,
+                items: state.items.filter(ingredient => ingredient.index !== action.index),
+            };
         default:
             return state;
     }
