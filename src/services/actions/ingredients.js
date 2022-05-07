@@ -20,4 +20,19 @@ export const getIngredients = () => dispatch => {
             error: err.message === "Failed to fetch" ? "Не удалось получить ингредиенты" : err,
         });
     });
-}
+};
+
+export const setBunsAmount = id => ({
+    type: SET_BUNS_AMOUNT,
+    id: id,
+});
+
+export const incrementIngredient = id => ({
+    type: INCREMENT_INGREDIENT,
+    id: id,
+});
+
+export const decrementIngredient = id => ({
+    type: DECREMENT_INGREDIENT,
+    id: id,
+})

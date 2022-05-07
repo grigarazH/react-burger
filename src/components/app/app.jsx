@@ -8,8 +8,11 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/actions/ingredients";
-import {DESELECT_INGREDIENT, SELECT_INGREDIENT} from "../../services/actions/current-ingredient";
-import {CLEAR_ORDER, postOrder} from "../../services/actions/order";
+import {
+    deselectIngredient,
+    selectIngredient
+} from "../../services/actions/current-ingredient";
+import {clearOrder, postOrder} from "../../services/actions/order";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 
@@ -21,13 +24,13 @@ function App() {
     const dispatch = useDispatch();
     const constructorIngredients = useSelector(store => store.constructorIngredients.items);
     const closeAllModals = () => {
-        dispatch({type: DESELECT_INGREDIENT});
-        dispatch({type: CLEAR_ORDER});
+        dispatch(deselectIngredient());
+        dispatch(clearOrder());
         setIngredientModalActive(false);
         setOrderModalActive(false);
     }
-    const selectIngredient = ingredient => {
-        dispatch({type: SELECT_INGREDIENT, ingredient});
+    const onSelectIngredient = ingredient => {
+        dispatch(selectIngredient(ingredient));
         setIngredientModalActive(true);
     }
     const orderBurger = () => {
@@ -43,7 +46,7 @@ function App() {
             <AppHeader/>
             <main className={styles.app__content}>
                 <DndProvider backend={HTML5Backend}>
-                <BurgerIngredients className={styles.app__ingredients} onSelect={selectIngredient}/>
+                <BurgerIngredients className={styles.app__ingredients} onSelect={onSelectIngredient}/>
                 <BurgerConstructor onOrder={orderBurger}/>
                 </DndProvider>
             </main>

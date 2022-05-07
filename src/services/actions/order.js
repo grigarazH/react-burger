@@ -1,4 +1,5 @@
 import BurgerApi from "../burger-api";
+import {setConstructorIngredients} from "./constructor";
 
 export const POST_ORDER_REQUEST = "POST_ORDER_REQUEST";
 export const POST_ORDER_SUCCESS = "POST_ORDER_SUCCESS";
@@ -14,6 +15,9 @@ export const postOrder = (ingredients) => dispatch => {
                order: data.order,
            });
         })
+        .then(() => {
+            dispatch(setConstructorIngredients([]));
+        })
         .catch(err => {
             dispatch({
                 type: POST_ORDER_ERROR,
@@ -21,3 +25,5 @@ export const postOrder = (ingredients) => dispatch => {
             });
         });
 }
+
+export const clearOrder = () => ({type: CLEAR_ORDER});

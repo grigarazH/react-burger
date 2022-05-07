@@ -1,12 +1,15 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {Button, ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
-import {DragIcon, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor.module.css";
 import {useDispatch, useSelector} from "react-redux";
-import {useDrag, useDrop} from "react-dnd";
-import {ADD_INGREDIENT, DELETE_INGREDIENT, SET_BUN} from "../../services/actions/constructor";
-import {INCREMENT_INGREDIENT, SET_BUNS_AMOUNT} from "../../services/actions/ingredients";
+import {useDrop} from "react-dnd";
+import {addIngredient, setBun} from "../../services/actions/constructor";
+import {
+    incrementIngredient,
+    setBunsAmount
+} from "../../services/actions/ingredients";
 import ConstructorDraggableElement from "../constructor-draggable-element/constructor-draggable-element";
 
 const BurgerConstructor = ({onOrder}) => {
@@ -20,11 +23,11 @@ const BurgerConstructor = ({onOrder}) => {
        drop: item => {
            const ingredient = ingredients.find(ingredient => ingredient._id === item.id);
            if(ingredient.type === "bun") {
-               dispatch({type: SET_BUN, ingredient: ingredient});
-               dispatch({type: SET_BUNS_AMOUNT, id: ingredient._id});
+               dispatch(setBun(ingredient));
+               dispatch(setBunsAmount(ingredient._id));
            }else{
-               dispatch({type: ADD_INGREDIENT, ingredient: ingredient});
-               dispatch({type: INCREMENT_INGREDIENT, id: ingredient._id});
+               dispatch(addIngredient(ingredient));
+               dispatch(incrementIngredient(ingredient._id));
            }
        }
     });

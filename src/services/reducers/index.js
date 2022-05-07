@@ -89,7 +89,7 @@ const constructorReducer = (state = constructorInitialState, action) => {
         case ADD_INGREDIENT:
             return {
                 ...state,
-                items: [...state.items, {...action.ingredient, amount: undefined, index: uuidv4()}],
+                items: [...state.items, {...action.ingredient, amount: undefined, uuid: uuidv4()}],
             };
         case DELETE_INGREDIENT:
             return {

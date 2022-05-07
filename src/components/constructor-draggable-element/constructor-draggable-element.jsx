@@ -3,8 +3,11 @@ import React, {useCallback} from "react";
 import styles from './constructor-draggable-element.module.css';
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {DELETE_INGREDIENT, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/constructor";
-import {DECREMENT_INGREDIENT} from "../../services/actions/ingredients";
+import {
+    deleteIngredient,
+    setConstructorIngredients
+} from "../../services/actions/constructor";
+import {decrementIngredient} from "../../services/actions/ingredients";
 import {ingredientPropType} from "../../utils/data";
 
 const ConstructorDraggableElement = ({ingredient}) => {
@@ -15,11 +18,11 @@ const ConstructorDraggableElement = ({ingredient}) => {
         let sortedIngredients = [...constructorIngredients];
         sortedIngredients.splice(constructorIngredients.findIndex(item => item.uuid === uuid), 1);
         sortedIngredients.splice(newIndex, 0, constructorIngredients.find(item => item.uuid === uuid));
-        dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, ingredients: sortedIngredients});
+        dispatch(setConstructorIngredients(sortedIngredients));
     }
     const onDelete = useCallback(() => {
-        dispatch({type: DELETE_INGREDIENT, uuid: ingredient.uuid});
-        dispatch({type: DECREMENT_INGREDIENT, id: ingredient._id})
+        dispatch(deleteIngredient(ingredient.uuid));
+        dispatch(decrementIngredient(ingredient._id));
     }, [ingredient]);
     const [{isDrag}, drag] = useDrag({
         type: "constructorIngredient",
