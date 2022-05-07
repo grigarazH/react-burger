@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 import {
     DECREMENT_INGREDIENT,
     GET_INGREDIENTS_ERROR,
-    GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, INCREMENT_INGREDIENT, SET_BUNS_AMOUNT, UPDATE_INGREDIENTS,
+    GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, INCREMENT_INGREDIENT, SET_BUNS_AMOUNT,
 } from "../actions/ingredients";
 import {ADD_INGREDIENT, DELETE_INGREDIENT, SET_BUN, SET_CONSTRUCTOR_INGREDIENTS} from "../actions/constructor";
 import {SELECT_INGREDIENT, DESELECT_INGREDIENT} from "../actions/current-ingredient";
@@ -13,6 +13,7 @@ import {
     POST_ORDER_REQUEST,
     POST_ORDER_SUCCESS,
 } from "../actions/order";
+import {v4 as uuidv4} from 'uuid';
 
 const ingredientsInitialState = {
     items: [],
@@ -83,18 +84,17 @@ const constructorReducer = (state = constructorInitialState, action) => {
         case SET_BUN:
             return {
                 ...state,
-                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined}],
+                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined, uuid: uuidv4()}],
             };
         case ADD_INGREDIENT:
             return {
                 ...state,
-                items: [...state.items, {...action.ingredient, amount: undefined, index: state.lastIndex}],
-                lastIndex: state.lastIndex + 1,
+                items: [...state.items, {...action.ingredient, amount: undefined, index: uuidv4()}],
             };
         case DELETE_INGREDIENT:
             return {
                 ...state,
-                items: state.items.filter(ingredient => ingredient.index !== action.index),
+                items: state.items.filter(ingredient => ingredient.uuid !== action.uuid),
             };
         default:
             return state;

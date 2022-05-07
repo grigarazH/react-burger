@@ -52,7 +52,7 @@ const BurgerConstructor = ({onOrder}) => {
                 {middleIngredients.length > 0 && (
                     <li><ul className={styles.middleIngredientsList}>
                         {middleIngredients.map((ingredient) => (
-                            <ConstructorDraggableElement key={ingredient.index} ingredient={ingredient}/>
+                            <ConstructorDraggableElement key={ingredient.uuid} ingredient={ingredient}/>
                         ))}
                     </ul></li>
                 )}

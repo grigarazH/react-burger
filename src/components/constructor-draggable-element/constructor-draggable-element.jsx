@@ -9,26 +9,25 @@ import {ingredientPropType} from "../../utils/data";
 
 const ConstructorDraggableElement = ({ingredient}) => {
     const constructorIngredients = useSelector(store => store.constructorIngredients.items);
-    const originalPosition = constructorIngredients.indexOf(ingredient);
+    const originalIndex = constructorIngredients.indexOf(ingredient);
     const dispatch = useDispatch();
-    const move = (index, newPosition) => {
+    const onMove = (uuid, newIndex) => {
         let sortedIngredients = [...constructorIngredients];
-        sortedIngredients.splice(constructorIngredients.findIndex(item => item.index === index), 1);
-        sortedIngredients.splice(newPosition, 0, constructorIngredients.find(item => item.index === index));
+        sortedIngredients.splice(constructorIngredients.findIndex(item => item.uuid === uuid), 1);
+        sortedIngredients.splice(newIndex, 0, constructorIngredients.find(item => item.uuid === uuid));
         dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, ingredients: sortedIngredients});
     }
     const onDelete = useCallback(() => {
-        dispatch({type: DELETE_INGREDIENT, index: ingredient.index});
+        dispatch({type: DELETE_INGREDIENT, uuid: ingredient.uuid});
         dispatch({type: DECREMENT_INGREDIENT, id: ingredient._id})
     }, [ingredient]);
     const [{isDrag}, drag] = useDrag({
         type: "constructorIngredient",
-        item: {index: ingredient.index, originalPosition},
-        end: ({index: droppedIndex, originalPosition}, monitor) => {
+        item: {uuid: ingredient.uuid, originalIndex},
+        end: ({uuid: droppedUuid, originalIndex}, monitor) => {
             const didDrop = monitor.didDrop();
             if(!didDrop) {
-                let sortedIngredients = [...constructorIngredients];
-                move(droppedIndex, originalPosition);
+                onMove(droppedUuid, originalIndex);
             }
         },
         collect: monitor => ({
@@ -37,10 +36,10 @@ const ConstructorDraggableElement = ({ingredient}) => {
     });
     const [, drop] = useDrop({
         accept: "constructorIngredient",
-        hover: ({index: draggedIndex}) => {
-            if (draggedIndex !== ingredient.index) {
-                const hoverPosition = constructorIngredients.indexOf(ingredient);
-                move(draggedIndex, hoverPosition);
+        hover: ({uuid: draggedUuid}) => {
+            if (draggedUuid !== ingredient.uuid) {
+                const hoverIndex = constructorIngredients.indexOf(ingredient);
+                onMove(draggedUuid, hoverIndex);
             }
         }
     });
