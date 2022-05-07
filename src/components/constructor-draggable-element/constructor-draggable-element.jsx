@@ -5,6 +5,7 @@ import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import {DELETE_INGREDIENT, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/constructor";
 import {DECREMENT_INGREDIENT} from "../../services/actions/ingredients";
+import {ingredientPropType} from "../../utils/data";
 
 const ConstructorDraggableElement = ({ingredient}) => {
     const constructorIngredients = useSelector(store => store.constructorIngredients.items);
@@ -55,6 +56,10 @@ const ConstructorDraggableElement = ({ingredient}) => {
             />
         </li>
     )
+}
+
+ConstructorDraggableElement.propTypes = {
+    ingredient: ingredientPropType.isRequired,
 }
 
 export default ConstructorDraggableElement;

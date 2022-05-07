@@ -55,11 +55,6 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
                 error: action.error,
                 items: [],
             };
-        case UPDATE_INGREDIENTS:
-            return {
-                ...state,
-                items: action.ingredients,
-            };
         case INCREMENT_INGREDIENT:
             return {
                 ...state,

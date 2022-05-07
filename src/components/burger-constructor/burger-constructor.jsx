@@ -28,9 +28,6 @@ const BurgerConstructor = ({onOrder}) => {
            }
        }
     });
-    const onDeleteIngredient = index => {
-        dispatch({type: DELETE_INGREDIENT, index: index});
-    }
     useEffect(() => {
         setBunIngredient(constructorIngredients.find(ingredient => ingredient.type === "bun"));
         setMiddleIngredients(constructorIngredients.filter(ingredient => ingredient.type !== "bun"));
@@ -41,12 +38,14 @@ const BurgerConstructor = ({onOrder}) => {
                 {!bunIngredient && (
                     <div className={`${styles.ingredientPlaceholder} constructor-element constructor-element_pos_top ml-8 pr-4`}>Перетащите булку</div>
                 )}
-                {bunIngredient && <li className={styles.ingredient}><ConstructorElement
+                {bunIngredient && (
+                    <li className={styles.ingredient}><ConstructorElement
                     type="top"
                     isLocked={true}
                     text={`${bunIngredient.name} (верх)`}
                     thumbnail={bunIngredient.image}
-                    price={bunIngredient.price}/></li>}
+                    price={bunIngredient.price}/></li>)
+                }
                 {middleIngredients.length === 0 && (
                     <div className={` constructor-element ${styles.ingredientPlaceholder} ml-8 pr-4 mb-4 mt-4`}>Перетащите ингредиенты</div>
                 )}
@@ -60,14 +59,14 @@ const BurgerConstructor = ({onOrder}) => {
                 {!bunIngredient && (
                     <div className={`${styles.ingredientPlaceholder} constructor-element constructor-element_pos_bottom ml-8 pr-4`}>Перетащите булку</div>
                 )}
-                {bunIngredient &&
+                {bunIngredient && (
                     <li className={styles.ingredient}><ConstructorElement
                         type="bottom"
                         isLocked={true}
                         text={`${bunIngredient.name} (низ)`}
                         thumbnail={bunIngredient.image}
                         price={bunIngredient.price}
-                    /></li>}
+                    /></li>)}
             </ul>
                 {bunIngredient && middleIngredients.length > 0 && (
                     <div className={styles.orderInfo}>
