@@ -1,11 +1,12 @@
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, {useCallback, useMemo} from "react";
 import styles from './constructor-draggable-element.module.css';
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/constructor";
+import {DELETE_INGREDIENT, SET_CONSTRUCTOR_INGREDIENTS} from "../../services/actions/constructor";
+import {DECREMENT_INGREDIENT} from "../../services/actions/ingredients";
 
-const ConstructorDraggableElement = ({ingredient, onDelete}) => {
+const ConstructorDraggableElement = ({ingredient}) => {
     const constructorIngredients = useSelector(store => store.constructorIngredients.items);
     const originalPosition = constructorIngredients.indexOf(ingredient);
     const dispatch = useDispatch();
@@ -15,6 +16,10 @@ const ConstructorDraggableElement = ({ingredient, onDelete}) => {
         sortedIngredients.splice(newPosition, 0, constructorIngredients.find(item => item.index === index));
         dispatch({type: SET_CONSTRUCTOR_INGREDIENTS, ingredients: sortedIngredients});
     }
+    const onDelete = useCallback(() => {
+        dispatch({type: DELETE_INGREDIENT, index: ingredient.index});
+        dispatch({type: DECREMENT_INGREDIENT, id: ingredient._id})
+    }, [ingredient]);
     const [{isDrag}, drag] = useDrag({
         type: "constructorIngredient",
         item: {index: ingredient.index, originalPosition},
