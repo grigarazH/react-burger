@@ -18,7 +18,7 @@ export const getIngredients = () => dispatch => {
     }).catch(err => {
         dispatch({
             type: GET_INGREDIENTS_ERROR,
-            error: err,
+            error: err.message === "Failed to fetch" ? "Не удалось получить ингредиенты" : err,
         });
     });
 }

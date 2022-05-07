@@ -8,7 +8,7 @@ import {useInView} from "react-intersection-observer";
 
 const BurgerIngredients = ({onSelect, className}) => {
     const [currentTab, setCurrentTab] = useState("buns");
-    const ingredients = useSelector(store => store.ingredients.items);
+    const ingredients = useSelector(store => store.ingredients);
     const containerRef = useRef(null);
     const {ref: bunInViewRef, inView: bunInView} = useInView({threshold: 0});
     const {ref: sauceInViewRef, inView: sauceInView} = useInView({threshold: 0});
@@ -55,18 +55,28 @@ const BurgerIngredients = ({onSelect, className}) => {
     return (
         <section ref={containerRef} className={`${styles.burgerIngredients} ${className ? className : ""}`}>
             <h2 className={styles.heading}>Соберите бургер</h2>
-            <nav>
-                <ul className={styles.tabList}>
-                    <li><Tab active={currentTab === "buns"} value={"buns"} onClick={onTabClick}>Булки</Tab></li>
-                    <li><Tab active={currentTab === "sauces"} value={"sauces"} onClick={onTabClick}>Соусы</Tab></li>
-                    <li><Tab active={currentTab === "main"} value={"main"} onClick={onTabClick}>Начинки</Tab></li>
-                </ul>
-            </nav>
-            <ul className={styles.ingredientList}>
-                <li ref={setBunRefs}><IngredientCategory className={styles.category} title={"Булки"} ingredients={ingredients.filter(ingredient => ingredient.type === "bun")} onSelect={onSelect}/></li>
-                <li ref={setSauceRefs}><IngredientCategory className={styles.category} title={"Соусы"} ingredients={ingredients.filter(ingredient => ingredient.type === "sauce")} onSelect={onSelect}/></li>
-                <li ref={setMainRefs}><IngredientCategory className={styles.category} title={"Начинки"} ingredients={ingredients.filter(ingredient => ingredient.type === "main")} onSelect={onSelect}/></li>
-            </ul>
+            {ingredients.getIngredientsRequest && (
+                <p className={styles.status}>Загрузка...</p>
+            )}
+            {ingredients.getIngredientsError && (
+                <p className={styles.status}>Ошибка: {`${ingredients.error}`}</p>
+            )}
+            {ingredients.items.length > 0 && (
+                <>
+                    <nav>
+                        <ul className={styles.tabList}>
+                            <li><Tab active={currentTab === "buns"} value={"buns"} onClick={onTabClick}>Булки</Tab></li>
+                            <li><Tab active={currentTab === "sauces"} value={"sauces"} onClick={onTabClick}>Соусы</Tab></li>
+                            <li><Tab active={currentTab === "main"} value={"main"} onClick={onTabClick}>Начинки</Tab></li>
+                        </ul>
+                    </nav>
+                    <ul className={styles.ingredientList}>
+                        <li ref={setBunRefs}><IngredientCategory className={styles.category} title={"Булки"} ingredients={ingredients.items.filter(ingredient => ingredient.type === "bun")} onSelect={onSelect}/></li>
+                        <li ref={setSauceRefs}><IngredientCategory className={styles.category} title={"Соусы"} ingredients={ingredients.items.filter(ingredient => ingredient.type === "sauce")} onSelect={onSelect}/></li>
+                        <li ref={setMainRefs}><IngredientCategory className={styles.category} title={"Начинки"} ingredients={ingredients.items.filter(ingredient => ingredient.type === "main")} onSelect={onSelect}/></li>
+                    </ul>
+                </>
+            )}
         </section>
         );
 }

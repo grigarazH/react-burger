@@ -52,7 +52,8 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
                 ...state,
                 getIngredientsRequest: false,
                 getIngredientsError: true,
-                items: action.error,
+                error: action.error,
+                items: [],
             };
         case UPDATE_INGREDIENTS:
             return {
@@ -137,6 +138,8 @@ const orderReducer = (state = orderInitialState, action) => {
                 ...state,
                 postOrderRequest: false,
                 postOrderError: true,
+                order: null,
+                error: action.error,
             };
         case CLEAR_ORDER:
             return orderInitialState;

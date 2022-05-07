@@ -17,7 +17,7 @@ export const postOrder = (ingredients) => dispatch => {
         .catch(err => {
             dispatch({
                 type: POST_ORDER_ERROR,
-                error: err,
+                error: err.message === "Failed to fetch" ? "Не удалось создать заказ" : err,
             });
         });
 }
