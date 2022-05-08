@@ -6,11 +6,15 @@ const headers = {
 export default class BurgerApi {
     static getIngredients() {
         return fetch(`${url}/ingredients`, {headers}).then((res) => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка ${res.status}`);
+            return BurgerApi.checkResponse(res);
         });
+    }
+
+    static checkResponse(response) {
+        if(response.ok) {
+            return response.json();
+        }
+        return Promise.reject(`Ошибка ${response.status}`);
     }
 
     static postOrder(ingredients) {
@@ -19,10 +23,7 @@ export default class BurgerApi {
             headers,
             body: JSON.stringify({ingredients}),
         }).then(res => {
-            if(res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка ${res.status}`);
+            return BurgerApi.checkResponse(res);
         });
     }
 }
