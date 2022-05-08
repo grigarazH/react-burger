@@ -13,14 +13,12 @@ export const setConstructorIngredients = ingredients => ({
 
 export const addIngredient = ingredient => ({
     type: ADD_INGREDIENT,
-    ingredient: ingredient,
-    uuid: uuidv4(),
+    ingredient: {...ingredient, uuid: uuidv4()}
 });
 
 export const setBun = ingredient => ({
     type: SET_BUN,
-    ingredient: ingredient,
-    uuid: uuidv4(),
+    ingredient: {...ingredient, uuid: uuidv4()},
 });
 
 export const deleteIngredient = uuid => ({

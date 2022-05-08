@@ -89,12 +89,12 @@ const constructorReducer = (state = constructorInitialState, action) => {
         case SET_BUN:
             return {
                 ...state,
-                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined, uuid: action.uuid}],
+                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined}],
             };
         case ADD_INGREDIENT:
             return {
                 ...state,
-                items: [...state.items, {...action.ingredient, amount: undefined, uuid: action.uuid}],
+                items: [...state.items, {...action.ingredient, amount: undefined}],
             };
         case DELETE_INGREDIENT:
             return {
