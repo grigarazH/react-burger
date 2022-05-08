@@ -14,7 +14,6 @@ import {
     POST_ORDER_REQUEST,
     POST_ORDER_SUCCESS,
 } from "../actions/order";
-import {v4 as uuidv4} from 'uuid';
 
 const ingredientsInitialState = {
     items: [],
@@ -90,12 +89,12 @@ const constructorReducer = (state = constructorInitialState, action) => {
         case SET_BUN:
             return {
                 ...state,
-                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined, uuid: uuidv4()}],
+                items: state.items.find(ingredient => ingredient.type === "bun") ? state.items.map(ingredient => ingredient.type === "bun" ? action.ingredient : ingredient) : [...state.items, {...action.ingredient, amount: undefined, uuid: action.uuid}],
             };
         case ADD_INGREDIENT:
             return {
                 ...state,
-                items: [...state.items, {...action.ingredient, amount: undefined, uuid: uuidv4()}],
+                items: [...state.items, {...action.ingredient, amount: undefined, uuid: action.uuid}],
             };
         case DELETE_INGREDIENT:
             return {
