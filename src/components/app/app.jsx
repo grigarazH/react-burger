@@ -53,7 +53,7 @@ function App() {
             {isIngredientModalActive && currentIngredient && <Modal onClose={closeAllModals}>
                 <IngredientDetails/>
             </Modal>}
-            {isOrderModalActive && orderData && <Modal onClose={closeAllModals}>
+            {isOrderModalActive && <Modal onClose={closeAllModals}>
                 <OrderDetails/>
             </Modal>}
         </div>

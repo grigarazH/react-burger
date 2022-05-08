@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 
 import {
+    CLEAR_INGREDIENT_AMOUNT,
     DECREMENT_INGREDIENT,
     GET_INGREDIENTS_ERROR,
     GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, INCREMENT_INGREDIENT, SET_BUNS_AMOUNT,
@@ -70,6 +71,11 @@ const ingredientsReducer = (state = ingredientsInitialState, action) => {
             return {
                 ...state,
                 items: state.items.map(ingredient => ingredient.type === "bun" ? ingredient._id === action.id ? {...ingredient, amount: 2} : {...ingredient, amount: 0} : ingredient),
+            };
+        case CLEAR_INGREDIENT_AMOUNT:
+            return {
+                ...state,
+                items: state.items.map(ingredient => ({...ingredient, amount: undefined})),
             };
         default:
             return state;
