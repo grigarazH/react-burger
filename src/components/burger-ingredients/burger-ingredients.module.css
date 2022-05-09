@@ -24,8 +24,14 @@
 .ingredientList {
     composes: custom-scroll from global;
     overflow-y: scroll;
-    scroll-padding-top: 40px;
+    scroll-margin-top: 40px;
     flex-grow: 1;
+    list-style-type: none;
+    padding: 0;
+}
+
+.status {
+    composes: text_type_main-small from global;
 }
 
 .category {

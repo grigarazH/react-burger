@@ -4,7 +4,7 @@ import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import styles from "./ingredient-category.module.css";
 import {ingredientPropType} from "../../utils/data";
 
-const IngredientCategory = ({className, title, ingredients, onSelect}) => {
+const IngredientCategory = ({ className, title, ingredients, onSelect}) => {
     return (
         <section className={className}>
             <h3 className={styles.title}>{title}</h3>

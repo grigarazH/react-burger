@@ -1,0 +1,22 @@
+.ingredient {
+    composes: mb-4 pl-8 pr-4 from global;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.ingredient_dragging {
+    opacity: 0;
+}
+
+.ingredient:last-of-type {
+    margin: 0;
+}
+
+.ingredient > :first-child {
+    position: absolute;
+    left: 0;
+    top: calc(50% - 12px);
+}
